@@ -1,3 +1,4 @@
+// tslint:disable: no-inferrable-types
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgressComponent implements OnInit {
 
+  percentage1: number = 20;
+  percentage2: number = 30;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  // update( event: number) {
+  //   console.log('Evento ', event);
+  // }
+
 
 }
