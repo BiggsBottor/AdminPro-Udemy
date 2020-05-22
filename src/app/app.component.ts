@@ -1,4 +1,6 @@
+// tslint:disable: variable-name
 import { Component } from '@angular/core';
+import { SettingsService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AdminPro';
+
+  constructor(public _settings: SettingsService) {}
 }

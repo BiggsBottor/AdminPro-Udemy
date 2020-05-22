@@ -15,8 +15,11 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Charts1Component } from './charts1/charts1.component';
-import { IncrementorComponent } from '../components/incrementor/incrementor.component'; // FIXME: temp
-import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component'; // FIXME: temp
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+
+// -- FIXME: temp -- //
+import { IncrementorComponent } from '../components/incrementor/incrementor.component';
+import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component';
 
 
 @NgModule ({
@@ -26,7 +29,8 @@ import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnu
     ProgressComponent,
     Charts1Component,
     IncrementorComponent, // FIXME: temp
-    DoughnutGraphicComponent // FIXME: temp
+    DoughnutGraphicComponent, // FIXME: temp
+    AccountSettingsComponent
   ],
   exports: [
     PagesComponent,

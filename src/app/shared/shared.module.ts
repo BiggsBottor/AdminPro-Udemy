@@ -1,4 +1,6 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -18,6 +20,10 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
     SidebarComponent,
     BreadcrumbsComponent,
     NoPageFoundComponent
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule
   ]
 })
 export class SharedModule { }
