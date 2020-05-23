@@ -16,6 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Charts1Component } from './charts1/charts1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 // -- FIXME: temp -- //
 import { IncrementorComponent } from '../components/incrementor/incrementor.component';
@@ -30,7 +32,9 @@ import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnu
     Charts1Component,
     IncrementorComponent, // FIXME: temp
     DoughnutGraphicComponent, // FIXME: temp
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   exports: [
     PagesComponent,

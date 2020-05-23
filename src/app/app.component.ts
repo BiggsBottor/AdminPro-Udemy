@@ -8,7 +8,7 @@ import { SettingsService } from './services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AdminPro';
+  // title = 'AdminPro';
 
   constructor(public _settings: SettingsService) {}
 }
