@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 // RUTAS
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +12,7 @@ import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { FormsModule } from '@angular/forms'; // FIXME: temp
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // FIXME: temp
 
 
 
@@ -23,9 +24,11 @@ import { FormsModule } from '@angular/forms'; // FIXME: temp
    ],
    imports: [
       BrowserModule,
+      HttpClientModule,
       AppRoutingModule,
       PagesModule,
-      FormsModule // FIXME: temp
+      FormsModule, // FIXME: temp
+      ReactiveFormsModule // FIXME: temp
    ],
    providers: [],
    bootstrap: [

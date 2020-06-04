@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-#themecolors {
-  a {
+// #themecolors {
+//   a {
+//   cursor: pointer;
+//   }
+// }
+#themecolors a, .pointer {
   cursor: pointer;
-  }
 }
+

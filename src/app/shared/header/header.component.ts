@@ -1,4 +1,6 @@
+// tslint:disable: variable-name
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor( public _userService: UserService ) { }
 
   ngOnInit(): void {
   }

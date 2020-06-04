@@ -22,7 +22,7 @@ export class SettingsService {
   }
 
   saveSettings() {
-    console.log('Saved correctly on localStorage');
+    console.log('%cTheme saved successfully on localStorage', 'color: lime');
     localStorage.setItem('settings', JSON.stringify(this.settings));
   }
 
