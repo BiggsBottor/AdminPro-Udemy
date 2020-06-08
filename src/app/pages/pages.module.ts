@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 // MÓDULOS
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../pipes/pipes.module';
+
 // -- ng2-charts -- //
 import { ChartsModule } from 'ng2-charts';
 
@@ -18,8 +20,8 @@ import { Charts1Component } from './charts1/charts1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
-// -- FIXME: temp -- //
 import { IncrementorComponent } from '../components/incrementor/incrementor.component';
 import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component';
 
@@ -30,11 +32,12 @@ import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnu
     DashboardComponent,
     ProgressComponent,
     Charts1Component,
-    IncrementorComponent, // FIXME: temp
-    DoughnutGraphicComponent, // FIXME: temp
-    AccountSettingsComponent,
+    IncrementorComponent,
     PromisesComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent,
+    DoughnutGraphicComponent,
+    AccountSettingsComponent
   ],
   exports: [
     PagesComponent,
@@ -47,7 +50,8 @@ import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnu
     SharedModule,
     PagesRoutingModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule
   ]
 })
 

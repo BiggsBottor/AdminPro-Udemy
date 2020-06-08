@@ -18,21 +18,13 @@ export class IncrementorComponent implements OnInit {
 
   @Output('UpdateValue') cambioValor: EventEmitter<number> = new EventEmitter();
 
-  constructor() {
-    // console.log('leyenda ', this.leyenda);
-    // console.log('porcentaje ', this.percentage);
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    // console.log('leyenda ', this.leyenda);
-    // console.log('porcentaje ', this.percentage);
-  }
+  ngOnInit(): void {}
 
   onChange( newValue: number ) {
-    // console.log('onchange ', newValue);
 
     // const elemHTML: any = document.getElementsByName('percentage')[0];
-    // console.log(elemHTML.value);
 
     if (newValue >= 100) {
       this.percentage = 100;

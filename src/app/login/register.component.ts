@@ -59,12 +59,9 @@ export class RegisterComponent implements OnInit {
 
     if ( this.forma.invalid ) { return; }
     if ( !this.forma.value.terms ) {
-      // console.log('%cDebe aceptar las condiciones', 'background: lightgrey; color: black' );
       swal.fire({ title: 'Importante', text: 'Debe aceptar las condiciones', icon: 'warning'});
       return;
     }
-    // console.log('%cValid form:', 'font-style: italic; color: gold', this.forma.valid);
-    // console.log(this.forma.value);
     const user = new User(
       this.fv.name,
       this.fv.email,
@@ -73,7 +70,6 @@ export class RegisterComponent implements OnInit {
 
     this._userService.createUser( user )
                     .subscribe( resp => this.router.navigate(['/login']));
-                    // .subscribe( resp => { console.log('createUser:', resp ); });
 
   }
 

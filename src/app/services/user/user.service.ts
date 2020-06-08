@@ -1,8 +1,10 @@
+// tslint:disable: variable-name
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../models/User.model';
 import { URL_SERVICES } from '../../config/config';
+import { UploadFilesService } from '../uploads/upload-files.service';
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
@@ -16,9 +18,10 @@ export class UserService {
 
   user: User;
   token: string;
+  id: string;
 
-  constructor(public http: HttpClient, public router: Router) {
-    // console.log('%cServicio de usuario listo', 'color: teal');
+  constructor(public http: HttpClient, public router: Router,
+              public _uploadFilesService: UploadFilesService) {
     this.loadFromLocalStorage();
   }
 
@@ -29,9 +32,11 @@ export class UserService {
   loadFromLocalStorage() {
 
     if ( localStorage.getItem( 'token' ) ) {
+      this.id = localStorage.getItem( 'id' );
       this.token = localStorage.getItem( 'token' );
       this.user = JSON.parse( localStorage.getItem( 'user' ) );
     } else {
+      this.id = null;
       this.token = '';
       this.user = null;
     }
@@ -43,6 +48,7 @@ export class UserService {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
 
+    this.id = id;
     this.user = user;
     this.token = token;
 
@@ -50,6 +56,7 @@ export class UserService {
 
   logOut() {
 
+    this.id = null;
     this.token = '';
     this.user = null;
 
@@ -77,17 +84,15 @@ export class UserService {
 
     return this.http.post( this.url + '/login', user )
                   .pipe(map( (resp: any) => {
-
-                    // localStorage.setItem('id', resp.id);
-                    // localStorage.setItem('token', resp.token);
-                    // localStorage.setItem('user', JSON.stringify(resp.user));
                     this.saveInLocalStorage( resp.id, resp.token, resp.usuario );
-
                     return true;
-
                   }));
 
   }
+
+  // =================================
+  // CRUD User
+  // =================================
 
   createUser( user: User ) {
 
@@ -99,4 +104,51 @@ export class UserService {
                   ));
 
   }
+
+  updateUser( user: User ) {
+
+    const tempUrl = this.url + `/usuario/${ this.user._id }?token=${ this.token }`;
+
+    return this.http.put( tempUrl , user )
+                  .pipe(map( (resp: any) => {
+                    const userDB: User = resp.usuario;
+                    swal.fire({ title: 'Usuario Actualizado', text: userDB.nombre, icon: 'success' });
+                    this.saveInLocalStorage( userDB._id, this.token, userDB );
+                    return true;
+                  }));
+
+  }
+
+  // =================================
+  // Images
+  // =================================
+
+  updloadFile( archivo: File, id: string ) {
+
+    // this._uploadFilesService.uploadFileJS( archivo, 'usuarios', id )
+    //         .then ( (resp: any) => {
+
+    //           this.user.img = resp.usuario.img;
+    //           swal.fire({ title: 'Imagen Actualizada', text: this.user.nombre, icon: 'success' });
+    //           this.saveInLocalStorage( id, this.token, this.user );
+
+    //         })
+    //         .catch( error => {
+    //           console.error( error );
+    //         });
+
+    this._uploadFilesService.uploadFile( archivo, 'usuarios', id )
+          .subscribe( (resp: any) => {
+
+            this.user.img = resp.usuario.img;
+            swal.fire({ title: 'Imagen Actualizada', text: this.user.nombre, icon: 'success' });
+            this.saveInLocalStorage( id, this.token, this.user );
+
+          }, error => {
+            console.error( error );
+          });
+
+
+  }
+
 }

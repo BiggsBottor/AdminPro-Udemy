@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ]
 })
 export class SharedModule { }

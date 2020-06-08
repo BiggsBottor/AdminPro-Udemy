@@ -10,3 +10,6 @@ export * from './user/user.service';
 
 // -- Guards -- //
 export * from './guards/login.guard';
+
+// -- Uploads -- //
+export * from './uploads/upload-files.service';
