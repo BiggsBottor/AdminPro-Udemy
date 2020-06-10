@@ -42,6 +42,8 @@ export class ProfileComponent implements OnInit {
 
     this.user.nombre = user.nombre;
     !this.user.google ? this.user.email = user.email : user.email = this.user.email;
+    user._id = this._userService.user._id;
+    user.role = this._userService.user.role;
 
     this._userService.updateUser( user ).subscribe();
 

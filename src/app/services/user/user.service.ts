@@ -1,3 +1,4 @@
+// tslint:disable: no-inferrable-types
 // tslint:disable: variable-name
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -107,15 +108,49 @@ export class UserService {
 
   updateUser( user: User ) {
 
-    const tempUrl = this.url + `/usuario/${ this.user._id }?token=${ this.token }`;
+    const tempUrl = this.url + `/usuario/${ user._id }?token=${ this.token }`;
 
     return this.http.put( tempUrl , user )
-                  .pipe(map( (resp: any) => {
-                    const userDB: User = resp.usuario;
-                    swal.fire({ title: 'Usuario Actualizado', text: userDB.nombre, icon: 'success' });
-                    this.saveInLocalStorage( userDB._id, this.token, userDB );
-                    return true;
-                  }));
+            .pipe(map( (resp: any) => {
+
+              if ( user._id === this.user._id ) { // sólo si se actualizan los datos de usuario actual
+                console.log('%cUsuario actualizado', 'color: lightgreen');
+                const userDB: User = resp.usuario;
+                this.saveInLocalStorage( userDB._id, this.token, userDB );
+              }
+              swal.fire({ title: 'Usuario Actualizado', text: user.nombre, icon: 'success' });
+              return true;
+
+            }));
+
+  }
+
+  loadUsers( desde: number = 0 ) {
+
+    let tempUrl = this.url + '/usuario';
+    if ( desde > 0) { tempUrl += '?desde=' + desde; }
+
+    return this.http.get( tempUrl );
+  }
+
+  FindUsers( term: string ) {
+    const url = `${ this.url }/busqueda/coleccion/usuarios/${ term }`;
+
+    return this.http.get( url ).pipe(map( (resp: any) => resp.usuarios ));
+  }
+
+  deleteUser( id: string ) {
+
+    const url = `${ this.url }/usuario/${ id }?token=${ this.token }`;
+
+    return this.http.delete( url ).pipe(map( resp => {
+      swal.fire(
+        'Usuario Borrado',
+        'El usuario ha sido borrado correctamente',
+        'success'
+      );
+      return true;
+    }));
 
   }
 
@@ -124,6 +159,8 @@ export class UserService {
   // =================================
 
   updloadFile( archivo: File, id: string ) {
+
+    // -- Vanilla JS call -- //
 
     // this._uploadFilesService.uploadFileJS( archivo, 'usuarios', id )
     //         .then ( (resp: any) => {
@@ -136,6 +173,8 @@ export class UserService {
     //         .catch( error => {
     //           console.error( error );
     //         });
+
+    // -- Angular CRUD call -- //
 
     this._uploadFilesService.uploadFile( archivo, 'usuarios', id )
           .subscribe( (resp: any) => {

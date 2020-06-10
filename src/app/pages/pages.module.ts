@@ -21,9 +21,12 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
+// -- componentes especiales -- //
 import { IncrementorComponent } from '../components/incrementor/incrementor.component';
 import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 
 @NgModule ({
@@ -37,7 +40,9 @@ import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnu
     RxjsComponent,
     ProfileComponent,
     DoughnutGraphicComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    UsuariosComponent,
+    ModalUploadComponent
   ],
   exports: [
     PagesComponent,
