@@ -12,6 +12,11 @@ import { ChartsModule } from 'ng2-charts';
 // RUTAS
 import { PagesRoutingModule } from './pages-routing.module';
 
+// -- componentes especiales -- //
+import { IncrementorComponent } from '../components/incrementor/incrementor.component';
+import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+
 // COMPONENTES
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,11 +27,9 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-
-// -- componentes especiales -- //
-import { IncrementorComponent } from '../components/incrementor/incrementor.component';
-import { DoughnutGraphicComponent } from '../components/doughnut-graphic/doughnut-graphic.component';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 
 @NgModule ({
@@ -42,7 +45,10 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
     DoughnutGraphicComponent,
     AccountSettingsComponent,
     UsuariosComponent,
-    ModalUploadComponent
+    ModalUploadComponent,
+    HospitalsComponent,
+    MedicosComponent,
+    MedicoComponent
   ],
   exports: [
     PagesComponent,

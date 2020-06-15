@@ -1,0 +1,89 @@
+<div class="row animated fadeIn">
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input #input (keyup)="findMedics( input.value )" type="text" class="form-control" placeholder="Buscar Hospital...">
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="loading"  class="row animated fadeIn">
+
+  <div class="col-sm-12">
+
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br>
+      <span>Espere por favor</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row animated fadeIn">
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="d-flex justify-content-end">
+          <button [routerLink]="['/medico', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+            <i class="fa fa-plus" ></i> Crear Médico</button>
+        </div>
+
+        <h3 class="card-title">Hospitales registrados ( <small>{{ _medicoService.total }}</small> )</h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Médico</th>
+              <th>Hospital</th>
+              <th>#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let medic of medics">
+              <td class="w70">
+                <img [src]="medic.img | image:'medicos'" class="img-50x50 img-50 img-circle" [alt]="medic.img">
+              </td>
+              <td>
+                {{ medic.nombre }}
+              </td>
+              <td>
+                {{ hospitalName(medic.hospital) }}
+              </td>
+              <td>
+                <button [routerLink]="['/medico', medic._id]" class="btn btn-primary mr-2">
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button (click)="deleteMedic( medic )" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button (click)="updateList(-5)" class="btn btn-secondary mr-2">
+          Anteriores
+        </button>
+
+        <button (click)="updateList(5)" class="btn btn-secondary">
+          Posteriores
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+</div>

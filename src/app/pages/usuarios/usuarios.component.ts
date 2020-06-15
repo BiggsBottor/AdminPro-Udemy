@@ -2,9 +2,9 @@
 // tslint:disable: no-inferrable-types
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User.model';
-import { UserService } from '../../services/';
+import { UserService, ModalUploadService } from '../../services';
+// import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 import swal from 'sweetalert2';
-import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -63,7 +63,7 @@ export class UsuariosComponent implements OnInit {
     this.loadUsers();
   }
 
-  findUser( term: string ) {
+  findUsers( term: string ) {
 
     if (term.length <= 0) {
       this.loadUsers();
@@ -72,7 +72,7 @@ export class UsuariosComponent implements OnInit {
 
     this.loading = true;
 
-    this._userService.FindUsers( term ).subscribe( (users: User[]) => {
+    this._userService.findUsers( term ).subscribe( (users: User[]) => {
 
       this.users = users;
       this.loading = false;
@@ -89,10 +89,11 @@ export class UsuariosComponent implements OnInit {
 
     swal.fire({
       title: '¿Está seguro?',
-      text: 'Está seguro de que quiere borrar a ' + user.nombre,
+      html: 'Está seguro de que quiere borrar a <b>' + user.nombre + '</b>',
       icon: 'warning',
       showCancelButton: true,
-      showConfirmButton: true
+      showConfirmButton: true,
+      confirmButtonText: 'Borrar',
     })
     .then(( isDeleted ) => {
       if (isDeleted.value) {

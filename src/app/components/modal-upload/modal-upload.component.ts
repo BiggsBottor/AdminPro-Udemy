@@ -2,8 +2,8 @@
 // tslint:disable: variable-name
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
-import { UploadFilesService } from '../../services';
-import { ModalUploadService } from './modal-upload.service';
+import { UploadFilesService, ModalUploadService } from '../../services';
+// import { ModalUploadService } from './modal-upload.service';
 
 @Component({
   selector: 'app-modal-upload',

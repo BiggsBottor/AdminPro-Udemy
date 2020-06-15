@@ -95,6 +95,7 @@ export class UserService {
   // CRUD User
   // =================================
 
+  // -- POST -- //
   createUser( user: User ) {
 
     return this.http.post( this.url + '/usuario', user )
@@ -106,6 +107,22 @@ export class UserService {
 
   }
 
+  // -- GET -- //
+  loadUsers( desde: number = 0 ) {
+
+    let tempUrl = this.url + '/usuario';
+    if ( desde > 0) { tempUrl += '?desde=' + desde; }
+
+    return this.http.get( tempUrl );
+  }
+
+  findUsers( term: string ) {
+    const url = `${ this.url }/busqueda/coleccion/usuarios/${ term }`;
+
+    return this.http.get( url ).pipe(map( (resp: any) => resp.usuarios ));
+  }
+
+  // -- PUT -- //
   updateUser( user: User ) {
 
     const tempUrl = this.url + `/usuario/${ user._id }?token=${ this.token }`;
@@ -125,20 +142,7 @@ export class UserService {
 
   }
 
-  loadUsers( desde: number = 0 ) {
-
-    let tempUrl = this.url + '/usuario';
-    if ( desde > 0) { tempUrl += '?desde=' + desde; }
-
-    return this.http.get( tempUrl );
-  }
-
-  FindUsers( term: string ) {
-    const url = `${ this.url }/busqueda/coleccion/usuarios/${ term }`;
-
-    return this.http.get( url ).pipe(map( (resp: any) => resp.usuarios ));
-  }
-
+  // -- DELETE -- //
   deleteUser( id: string ) {
 
     const url = `${ this.url }/usuario/${ id }?token=${ this.token }`;
