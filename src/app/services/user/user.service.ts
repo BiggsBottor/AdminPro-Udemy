@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { User } from '../../models/User.model';
 import { URL_SERVICES } from '../../config/config';
 import { UploadFilesService } from '../uploads/upload-files.service';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import swal from 'sweetalert2';
 
 
@@ -20,6 +21,7 @@ export class UserService {
   user: User;
   token: string;
   id: string;
+  menu: any[] = [];
 
   constructor(public http: HttpClient, public router: Router,
               public _uploadFilesService: UploadFilesService) {
@@ -36,22 +38,26 @@ export class UserService {
       this.id = localStorage.getItem( 'id' );
       this.token = localStorage.getItem( 'token' );
       this.user = JSON.parse( localStorage.getItem( 'user' ) );
+      this.menu = JSON.parse( localStorage.getItem( 'menu' ) );
     } else {
       this.id = null;
       this.token = '';
       this.user = null;
+      this.menu = [];
     }
   }
 
-  saveInLocalStorage( id: string, token: string, user: User ) {
+  saveInLocalStorage( id: string, token: string, user: User, menu: any ) {
 
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.id = id;
     this.user = user;
     this.token = token;
+    this.menu = menu;
 
   }
 
@@ -60,10 +66,12 @@ export class UserService {
     this.id = null;
     this.token = '';
     this.user = null;
+    this.menu = [];
 
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
 
     this.router.navigate(['/login']);
   }
@@ -72,7 +80,7 @@ export class UserService {
 
     return this.http.post( this.url + '/login/google', { token } )
                     .pipe(map( (resp: any) => {
-                      this.saveInLocalStorage( resp.id, resp.token, resp.usuario );
+                      this.saveInLocalStorage( resp.id, resp.token, resp.usuario, resp.menu );
                       return true;
                     }));
 
@@ -85,9 +93,14 @@ export class UserService {
 
     return this.http.post( this.url + '/login', user )
                   .pipe(map( (resp: any) => {
-                    this.saveInLocalStorage( resp.id, resp.token, resp.usuario );
+                    this.saveInLocalStorage( resp.id, resp.token, resp.usuario, resp.menu );
                     return true;
-                  }));
+                  }),
+                  catchError( err => {
+                    swal.fire( 'Login Incorrecto', err.error.message, 'error' );
+                    return throwError(err);
+                  })
+                  );
 
   }
 
@@ -103,7 +116,11 @@ export class UserService {
                       swal.fire({ title: 'Usuario creado', text: user.email, icon: 'success' });
                       return resp.usuario;
                     }
-                  ));
+                  ),
+                  catchError( err => {
+                    swal.fire( err.error.message, err.error.errors.message, 'error' );
+                    return throwError(err);
+                  }));
 
   }
 
@@ -133,11 +150,15 @@ export class UserService {
               if ( user._id === this.user._id ) { // sólo si se actualizan los datos de usuario actual
                 console.log('%cUsuario actualizado', 'color: lightgreen');
                 const userDB: User = resp.usuario;
-                this.saveInLocalStorage( userDB._id, this.token, userDB );
+                this.saveInLocalStorage( userDB._id, this.token, userDB, this.menu );
               }
               swal.fire({ title: 'Usuario Actualizado', text: user.nombre, icon: 'success' });
               return true;
 
+            }),
+            catchError( err => {
+              swal.fire( err.error.message, err.error.errors.message, 'error' );
+              return throwError(err);
             }));
 
   }
@@ -185,7 +206,7 @@ export class UserService {
 
             this.user.img = resp.usuario.img;
             swal.fire({ title: 'Imagen Actualizada', text: this.user.nombre, icon: 'success' });
-            this.saveInLocalStorage( id, this.token, this.user );
+            this.saveInLocalStorage( id, this.token, this.user, this.menu );
 
           }, error => {
             console.error( error );

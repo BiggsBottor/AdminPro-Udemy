@@ -1,0 +1,78 @@
+<div class="row">
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title">Usuarios</h4>
+
+        <table class="table table-hover" *ngIf="users.length > 0">
+          <tbody>
+            <tr *ngFor="let user of users" [routerLink]="['/usuarios']" class="pointer" >
+              <td>
+                <img class="img-50 img-50x50 img-circle" [src]="user.img | image" alt="user.img">
+              </td>
+              <td>{{ user.nombre }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info" *ngIf="users.length === 0" >
+          <span>No hay registros</span>
+        </div>
+
+      </div> <!-- card-body -->
+    </div> <!-- card -->
+  </div> <!-- col-4 -->
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title">Médicos</h4>
+
+        <table class="table table-hover" *ngIf="medics.length > 0">
+          <tbody>
+            <tr *ngFor="let medic of medics" [routerLink]="['/medico', medic._id]" class="pointer" >
+              <td>
+                <img class="img-50 img-50x50 img-circle" [src]="medic.img | image:'medicos'" alt="medic.img">
+              </td>
+              <td>{{ medic.nombre }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info" *ngIf="medics.length === 0" >
+          <span>No hay registros</span>
+        </div>
+
+      </div> <!-- card-body -->
+    </div> <!-- card -->
+  </div> <!-- col-4 -->
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title">Hospitales</h4>
+
+        <table class="table table-hover" *ngIf="hospitals.length > 0">
+          <tbody>
+            <tr *ngFor="let hospital of hospitals" [routerLink]="['/hospitales']" class="pointer" >
+              <td>
+                <img class="img-50 img-50x50" [src]="hospital.img | image:'hospitales'" alt="hospital.img">
+              </td>
+              <td>{{ hospital.nombre }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info" *ngIf="hospitals.length === 0" >
+          <span>No hay registros</span>
+        </div>
+
+      </div> <!-- card-body -->
+    </div> <!-- card -->
+  </div> <!-- col-4 -->
+
+</div>

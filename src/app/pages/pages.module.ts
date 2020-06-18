@@ -30,6 +30,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule ({
@@ -48,7 +49,8 @@ import { MedicoComponent } from './medicos/medico.component';
     ModalUploadComponent,
     HospitalsComponent,
     MedicosComponent,
-    MedicoComponent
+    MedicoComponent,
+    SearchComponent
   ],
   exports: [
     PagesComponent,
