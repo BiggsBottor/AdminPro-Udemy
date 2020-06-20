@@ -17,6 +17,7 @@ export * from './medico/medico.service';
 // -- Guards -- //
 export * from './guards/login.guard';
 export * from './guards/admin.guard';
+export * from './guards/verify-token.guard';
 
 // -- Uploads -- //
 export * from './uploads/upload-files.service';

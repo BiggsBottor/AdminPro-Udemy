@@ -1,4 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -35,7 +36,7 @@ import { SearchComponent } from './search/search.component';
 
 @NgModule ({
   declarations: [
-    PagesComponent,
+    // PagesComponent,
     DashboardComponent,
     ProgressComponent,
     Charts1Component,
@@ -46,20 +47,21 @@ import { SearchComponent } from './search/search.component';
     DoughnutGraphicComponent,
     AccountSettingsComponent,
     UsuariosComponent,
-    ModalUploadComponent,
+    // ModalUploadComponent,
     HospitalsComponent,
     MedicosComponent,
     MedicoComponent,
     SearchComponent
   ],
   exports: [
-    PagesComponent,
+    // PagesComponent,
     DashboardComponent,
     ProgressComponent,
     Charts1Component
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    CommonModule,
     SharedModule,
     PagesRoutingModule,
     FormsModule,

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginGuard, AdminGuard } from '../services';
+import { LoginGuard, AdminGuard, VerifyTokenGuard } from '../services';
 
-import { PagesComponent } from './pages.component';
+// import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,15 +18,19 @@ import { SearchComponent } from './search/search.component';
 
 
 const pagesRoutes: Routes = [
-  {
-    path: '', component: PagesComponent,
-    canActivate: [ LoginGuard ],
-    children: [
+  // {
+  //   path: '', component: PagesComponent,
+  //   canActivate: [ LoginGuard ],
+  //   children: [
       // General
       { path: 'profile', component: ProfileComponent, data: { title: 'User Profile' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Account Settings' } },
       // paginas compartidas
-      { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [ VerifyTokenGuard ],
+        data: { title: 'Dashboard' } },
       { path: 'progress', component: ProgressComponent, data: { title: 'Progress Bar' } },
       { path: 'charts1', component: Charts1Component, data: { title: 'Charts' } },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' } },
@@ -43,8 +47,8 @@ const pagesRoutes: Routes = [
       { path: 'medicos', component: MedicosComponent, data: { title: 'Mantenimiento de Médicos' } },
       { path: 'medico/:id', component: MedicoComponent, data: { title: 'Actualizar Médicos' } },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-    ]
-  },
+  //   ]
+  // },
 ];
 
 @NgModule({
